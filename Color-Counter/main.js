@@ -9,19 +9,15 @@ plus.addEventListener('click', function(){
     h2.style.color = randomHexColor();
 });
 minus.addEventListener('click', function(){
-    if( count != 0){
         count--;
-    } else{
-        count = 0;
-    }
+        h2.style.color = (count < 0) ? 'red' : randomHexColor();    
+        h2.textContent = count;
     
-    h2.textContent = count;
-    h2.style.color = randomHexColor();
 });
 reset.addEventListener('click', function(){
  count = 0;
  h2.textContent = count;
- h2.style.color = randomHexColor();
+ h2.style.color = 'blue';
 });
 
 function randomHexColor(){
