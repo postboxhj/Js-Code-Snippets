@@ -1,53 +1,25 @@
-(async()=>{
-
-
-
-const showNotifications = () =>{
-    const notification = new Notification('Notifications API', {
-        body : 'This is the sample code for the notification API',
-        icon : './js.png',
-        vibrate : true
+(async () => {
+  const showNotification = () => {
+      //Creating the Notification API
+    const notification = new Notification("Title", {
+      body: "This is a new notification",
+      icon: "./vN.jpg",
     });
-
-
+        //Setting the timeout interval to close the Notification
     setTimeout(() => {
-        notification.close();
-        
-    }, 10*1000);
-
-    notification.addEventListener('click', () => {
-        window.open('https://www.google.com/')
-    })
-
-}
-
-
-const showError = () => {
-    const error = document.querySelector('.error');
-    error.style.display = 'block';
-    error.textContent = 'You Blocked This Notification';
-
-}
-
-let grant = 'false';
-
-if(Notification.permission === 'grant'){
-    grant = 'true';
-}
-else if(Notification.permission !== 'denied'){
-    let permission = await Notification.requestPermission();
-    grant = permission === 'grant' ? 'true' : 'false';
-}
-
-grant ? showNotifications() : showError();
-
-
-
-
-
-
-
-
-
-
+      notification.close();
+    }, 10 * 1000);
+    //Creating the Event listener for action in the Notification
+    notification.addEventListener("click", () => {
+      window.open("https://www.google.com/");
+    });
+  };
+    // Getting the permission for grant or deny
+  const permission = await Notification.requestPermission();
+  console.log(permission);
+  if (permission === "granted") {
+    showNotification();
+  } else {
+    console.error("Permission denied for showing notifications.");
+  }
 })();
