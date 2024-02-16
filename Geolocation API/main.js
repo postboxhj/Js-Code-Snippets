@@ -1,29 +1,17 @@
-(()=>{
+//GeoLocation API
 
-
-const message = document.querySelector('#message');
-if(!navigator.geolocation){
-    message.textContent = 'Your browser does not support geolocation';
-    message.classList.add('error');
-    return;
-}
-
-
-const btn = document.querySelector('#menu');
-btn.addEventListener('click', () => {
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-})
-
- function  onSuccess(position){
-    const { latitude, longitude } = position.coords;
-    message.textContent = `Your location is: (ϕ${latitude} and λ${longitude})`;
-    message.classList.add('success');
-}
-
-function onError(){
-    message.textContent = `Failed to get your location`;
-    message.classList.add('error');
-}
-
-
+(() => {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log("Latitude: " + position.coords.latitude);
+        console.log("Longitude: " + position.coords.longitude);
+      },
+      (error) => {
+        console.error("Error occurred:", error.message);
+      }
+    );
+  } else {
+    console.error("Geolocation is not supported by this browser.");
+  }
 })();
